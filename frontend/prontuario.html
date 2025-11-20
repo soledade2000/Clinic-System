@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prontuário - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .full { grid-column: 1 / -1; }
+    .small { font-size: 0.9rem; color:#555; }
+    .panel { background:#fff;padding:14px;border-radius:8px;box-shadow:0 6px 18px rgba(10,20,40,0.04); margin-bottom:12px;}
+    label { display:block; font-weight:600; margin-bottom:6px; }
+    textarea { min-height:80px; resize:vertical; }
+    .actions { display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap: wrap; }
+    .versions { max-height:180px; overflow:auto; border:1px solid #eee; padding:8px; border-radius:6px; background:#fbfbfb; }
+    .notice { font-size:0.9rem; color:#334155; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html" title="Dashboard">🏠</a>
+        <a class="icon" href="consultas.html" title="Agendamento">📅</a>
+        <a class="icon" href="pacientes.html" title="Pacientes">👥</a>
+        <a class="icon" href="novo-paciente.html" title="Novo Paciente">➕</a>
+        <a class="icon active" href="prontuario.html" title="Prontuário">📑</a>
+        <a class="icon" href="#" id="logoutIcon" title="Sair">🔒</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="header"><div class="hello">Prontuário</div></div>
+
+      <div class="table-container panel">
+        <div id="pacienteSelecionadoBox" style="display:none; margin-bottom:10px;">
+          <div style="font-weight:700;">Paciente Selecionado:</div>
+          <div id="pacienteSelecionadoNome" style="color:#2563eb;"></div>
+          <button id="btnTrocarPaciente" style="margin-top:6px;">Trocar Paciente</button>
+        </div>
+
+        <div id="buscaBox">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+            <input id="pacienteId" type="number" placeholder="ID do paciente" />
+            <button id="btnBuscar">Buscar</button>
+            <div id="buscarMsg" class="small"></div>
+          </div>
+        </div>
+
+        <div id="pacienteInfo" style="margin-bottom:12px"></div>
+
+        <h4>Consultas do paciente</h4>
+        <table style="width:100%; margin-bottom:12px;">
+          <thead><tr><th>Data/Hora</th><th>Profissional</th><th>Status</th><th>Anotações</th></tr></thead>
+          <tbody id="consultasPacienteBody"><tr><td colspan="4">Nenhuma</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Prontuário -->
+      <div class="table-container panel">
+        <h3>Ficha de Triagem / Prontuário</h3>
+        <p class="notice">
+          As informações registradas aqui estão protegidas pela LGPD nº 13.709/2018.
+        </p>
+
+        <form id="prontuarioForm">
+          <div class="form-grid">
+            <div>
+              <label>Nome do paciente</label>
+              <input id="p_nome" placeholder="Nome completo" />
+            </div>
+
+            <div>
+              <label>Idade</label>
+              <input id="p_idade" type="number" min="0" />
+            </div>
+
+            <div class="full">
+              <label>Endereço</label>
+              <input id="p_endereco" />
+            </div>
+
+            <div>
+              <label>Telefone</label>
+              <input id="p_telefone" />
+            </div>
+
+            <div>
+              <label>Email</label>
+              <input id="p_email" type="email" />
+            </div>
+
+            <div>
+              <label>Serviço que busca</label>
+              <select id="p_servico">
+                <option>Psicologia</option>
+                <option>Fisioterapia</option>
+                <option>Nutrição</option>
+                <option>Clínico</option>
+                <option>Estética</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Forma de Pagamento</label>
+              <select id="p_forma_pagamento">
+                <option value="">Selecione</option>
+                <option value="Cartão">Cartão</option>
+                <option value="Pix">Pix</option>
+                <option value="Dinheiro">Dinheiro</option>
+                <option value="Semanal">Semanal</option>
+                <option value="Quinzenal">Quinzenal</option>
+                <option value="Mensal">Mensal</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label>Queixa principal</label>
+              <textarea id="q_queixa"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Histórico</label>
+              <textarea id="h_clinico"></textarea>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" id="btnSalvar">Salvar Prontuário</button>
+            <button type="button" id="btnSalvarLocal">Salvar Local</button>
+            <button type="button" id="btnExport">Exportar JSON</button>
+            <input type="file" id="importFile" style="display:none" accept="application/json" />
+            <button type="button" id="btnImport">Importar JSON</button>
+            <div id="formMsg" class="small"></div>
+          </div>
+
+          <div style="margin-top:10px;">
+            <strong>Versões locais:</strong>
+            <div id="versionsList" class="versions"></div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Upload de arquivos -->
+      <div class="table-container panel">
+        <h4>Arquivos do Paciente</h4>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;">
+          <input type="file" id="fileUpload" />
+          <button id="btnEnviarArquivo">📤 Enviar</button>
+        </div>
+        <div id="listaArquivos"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/prontuario.js"></script>
+</body>
+</html>

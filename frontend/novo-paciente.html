@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Novo Paciente - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .ficha { padding:16px; background:#fff; border-radius:10px; box-shadow:0 6px 20px rgba(0,0,0,0.04); }
+    .ficha h3 { margin-bottom:8px; }
+    .ficha .section { border-top:1px dashed #e6eef6; padding-top:12px; margin-top:12px; }
+    .ficha .row { display:flex; gap:12px; flex-wrap:wrap; }
+    .ficha .col { flex:1; min-width:200px; }
+    label { display:block; font-weight:600; margin-bottom:6px; }
+    .inline-checkboxes label { display:inline-block; margin-right:12px; font-weight:400; }
+    .ficha .two-col { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .file-actions { display:flex; gap:8px; align-items:center; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html">🏠</a>
+        <a class="icon" href="consultas.html">📅</a>
+        <a class="icon" href="pacientes.html">👥</a>
+        <a class="icon active" href="novo-paciente.html">➕</a>
+        <a class="icon" href="prontuario.html">📑</a>
+        <a class="icon" href="#" id="logoutIcon">🔒</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="header"><div class="hello">Novo Paciente</div></div>
+
+      <div class="table-container ficha">
+        <form id="pacienteForm">
+          <h3>Ficha de Cadastro</h3>
+          <p>Olá! Somos o Projeto Mente e Corpo... (LGPD etc.)</p>
+
+          <div class="two-col">
+            <div>
+              <label>Nome completo *</label>
+              <input id="nome_completo" name="nome_completo" required placeholder="Digite o nome completo" />
+            </div>
+            <div>
+              <label>Nome social</label>
+              <input id="nome_social" name="nome_social" placeholder="Opcional" />
+            </div>
+
+            <div>
+              <label>Data de nascimento *</label>
+              <input id="data_nascimento" name="data_nascimento" type="date" required />
+            </div>
+            <div>
+              <label>Idade</label>
+              <input id="idade" name="idade" type="number" min="0" placeholder="Calculada automaticamente" />
+            </div>
+
+            <div>
+              <label>Telefone *</label>
+              <input id="telefone" name="telefone" type="tel" placeholder="(00) 00000-0000" />
+            </div>
+            <div>
+              <label>Email</label>
+              <input id="email" name="email" type="email" placeholder="Opcional" />
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="row">
+              <div class="col">
+                <label>Endereço (rua, bairro, nº) *</label>
+                <input id="endereco" name="endereco" required placeholder="Rua, Bairro, Nº" />
+              </div>
+              <div class="col">
+                <label>CEP</label>
+                <input id="cep" name="cep" placeholder="Opcional" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label>Cidade e Estado *</label>
+                <input id="cidade_estado" name="cidade_estado" required placeholder="Cidade / Estado" />
+              </div>
+              <div class="col">
+                <label>Escolaridade</label>
+                <select id="escolaridade" name="escolaridade">
+                  <option>Fundamental completo</option>
+                  <option>Fundamental incompleto</option>
+                  <option>Ensino médio completo</option>
+                  <option>Ensino médio incompleto</option>
+                  <option>Ensino superior completo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Serviço e disponibilidade</h4>
+            <div class="row">
+              <div class="col">
+                <label>Qual serviço você está buscando? *</label>
+                <select id="servico" name="servico" required>
+                  <option>Fisioterapia</option>
+                  <option>Estética</option>
+                  <option>Psicologia</option>
+                  <option>Clínico</option>
+                  <option>Nutrição</option>
+                </select>
+              </div>
+              <div class="col">
+                <label>Disponibilidade de dias</label>
+                <div class="inline-checkboxes">
+                  <label><input type="checkbox" name="dias" value="Segunda"> Segunda</label>
+                  <label><input type="checkbox" name="dias" value="Terça"> Terça</label>
+                  <label><input type="checkbox" name="dias" value="Quarta"> Quarta</label>
+                  <label><input type="checkbox" name="dias" value="Quinta"> Quinta</label>
+                  <label><input type="checkbox" name="dias" value="Sexta"> Sexta</label>
+                  <label><input type="checkbox" name="dias" value="Sábado"> Sábado</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label>Horário para atendimento</label>
+                <input id="horario" type="time" name="horario" />
+              </div>
+              <div class="col">
+                <label>Renda mensal familiar</label>
+                <input id="renda" type="number" step="0.01" name="renda" placeholder="0.00" />
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Histórico de saúde</h4>
+            <label>Possui alguma condição de saúde? (marque as que se aplicam)</label>
+            <div class="inline-checkboxes">
+              <label><input type="checkbox" name="condicoes" value="Diabetes"> Diabetes</label>
+              <label><input type="checkbox" name="condicoes" value="Hipertensão"> Hipertensão</label>
+              <label><input type="checkbox" name="condicoes" value="Cardiopatia"> Cardiopatia</label>
+              <label><input type="checkbox" name="condicoes" value="Câncer"> Câncer</label>
+              <label><input type="checkbox" name="condicoes" value="Transtornos Mentais"> Transtornos Mentais</label>
+              <label><input type="checkbox" name="condicoes" value="Dependência"> Dependência química</label>
+            </div>
+
+            <div style="margin-top:8px;">
+              <label>Usa alguma medicação de uso contínuo?</label>
+              <textarea id="medicacoes" rows="2" placeholder="Opcional"></textarea>
+            </div>
+
+            <div style="margin-top:8px;">
+              <label>Queixa principal</label>
+              <textarea id="queixa" rows="3" placeholder="Opcional"></textarea>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Dados complementares</h4>
+            <div class="row">
+              <div class="col">
+                <label>Religião / crença</label>
+                <input id="religiao" placeholder="Opcional" />
+              </div>
+              <div class="col">
+                <label>Orientação sexual (opcional)</label>
+                <input id="orientacao" placeholder="Opcional" />
+              </div>
+            </div>
+
+            <div style="margin-top:8px;">
+              <label>Etnia</label>
+              <select id="etnia">
+                <option>Indígena</option>
+                <option>Preta(o)</option>
+                <option>Parda(o)</option>
+                <option>Branca(o)</option>
+                <option>Não sei</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section">
+            <h4>Enviar PDF da ficha (opcional)</h4>
+            <input type="file" id="fichaPdfInput" accept="application/pdf" />
+            <div class="file-actions">
+              <button id="btnEnviarPdf" type="button">Enviar PDF e associar</button>
+              <small class="small" id="pdfMsg"></small>
+            </div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <button type="submit">Cadastrar Paciente</button>
+            <button id="btnGerarPdf" type="button">Gerar PDF igual ao modelo</button>
+            <div id="msgPaciente" style="margin-top:8px;height:18px;color:#064e3b"></div>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/novo-paciente.js"></script>
+</body>
+</html>

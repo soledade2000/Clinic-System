@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pacientes - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .hidden { display: none; }
+    .btn-voltar { background:#eee; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; margin-bottom:10px; }
+    textarea.notaSessao { width:100%; min-height:60px; }
+    table { width:100%; border-collapse: collapse; }
+    table th, table td { border:1px solid #eee; padding:6px; text-align:left; }
+    .form-group { margin:10px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html" title="Dashboard">🏠</a>
+        <a class="icon" href="consultas.html" title="Agendamento">📅</a>
+        <a class="icon active" href="pacientes.html" title="Pacientes">👥</a>
+        <a class="icon" href="novo-paciente.html" title="Novo Paciente">➕</a>
+        <a class="icon" href="prontuario.html" title="Prontuário">📑</a>
+        <a class="icon" href="#" id="logoutIcon" title="Sair">🔒</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <!-- 🔹 LISTA DE PACIENTES -->
+      <section id="listaPacientesSection">
+        <div class="header">
+          <div class="hello">Todos os Pacientes</div>
+          <div class="search">
+            <input id="search" type="search" placeholder="🔍 Pesquisar paciente...">
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="tabela-pacientes">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Serviço</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="6">Carregando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 🔹 DETALHES DO PACIENTE -->
+      <section id="pacienteDetalhesSection" class="hidden">
+        <button id="btnVoltar" class="btn-voltar">← Voltar</button>
+        <h2 id="pacienteNomeTitulo"></h2>
+
+        <div id="dadosPaciente"></div>
+
+        <h3>Consultas e Observações</h3>
+        <table id="tabelaConsultasPaciente">
+          <thead><tr><th>Data</th><th>Médico</th><th>Status</th><th>Observações</th></tr></thead>
+          <tbody></tbody>
+        </table>
+
+        <h3>Forma de Pagamento</h3>
+        <div class="form-group">
+          <select id="formaPagamento">
+            <option value="">Selecione...</option>
+            <option value="pix">Pix</option>
+            <option value="cartao">Cartão</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="mensal">Mensal</option>
+            <option value="quinzenal">Quinzenal</option>
+            <option value="semanal">Semanal</option>
+          </select>
+          <button id="btnSalvarPagamento">💾 Salvar</button>
+          <small id="msgPagamento" class="small"></small>
+        </div>
+
+        <h3>Arquivos do Paciente</h3>
+        <input type="file" id="uploadArquivo" />
+        <button id="btnUpload">Enviar Arquivo</button>
+        <ul id="listaArquivos"></ul>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/pacientes.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: clinica_db
+    environment:
+      POSTGRES_USER: clinic_admin
+      POSTGRES_PASSWORD: sua_senha_segura
+      POSTGRES_DB: clinic_admin  # corrigido para bater com o backend
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clinic_admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: clinica_backend
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://clinic_admin:sua_senha_segura@db:5432/clinic_admin
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: clinic_admin
+      DB_NAME: clinic_admin
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    entrypoint: ["/app/entrypoint.sh"]
+
+  frontend:
+    image: nginx:stable-alpine
+    container_name: clinica_frontend
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    ports:
+      - "5500:80"
+    restart: unless-stopped

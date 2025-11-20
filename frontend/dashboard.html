@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html" title="Dashboard">🏠</a>
+        <a class="icon" href="consultas.html" title="Agendamento">📅</a>
+        <a class="icon" href="pacientes.html" title="Pacientes">👥</a>
+        <a class="icon" href="novo-paciente.html" title="Novo Paciente">➕</a>
+        <a class="icon" href="prontuario.html" title="Prontuário">📑</a>
+        <a class="icon" href="#" id="logoutIcon" title="Sair">🔒</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="header">
+        <div class="hello">Olá, <span id="userInfo">Usuário</span></div>
+        <div class="search">
+          <input id="searchInput" type="search" placeholder="Buscar...">
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="cards">
+        <div class="card">
+          <div class="icon">👥</div>
+          <div class="meta">
+            <h4>Total de Pacientes</h4>
+            <p id="totalPacientes">0</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="icon">📅</div>
+          <div class="meta">
+            <h4>Pacientes Agendados Hoje</h4>
+            <p id="pacientesAgendados">0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Próximas consultas -->
+      <div class="table-container">
+        <div class="table-top">
+          <div class="title">Próximas Consultas</div>
+          <div class="table-actions">
+            <input id="filterConsultas" placeholder="Filtrar por paciente..." />
+          </div>
+        </div>
+
+        <table id="tabela-consultas" aria-label="Próximas consultas">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Serviço</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="5">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Consultas - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html" title="Dashboard">🏠</a>
+        <a class="icon" href="consultas.html" title="Agendamento">📅</a>
+        <a class="icon" href="pacientes.html" title="Pacientes">👥</a>
+        <a class="icon" href="novo-paciente.html" title="Novo Paciente">➕</a>
+        <a class="icon" href="prontuario.html" title="Prontuário">📑</a>
+        <a class="icon" href="#" id="logoutIcon" title="Sair">🔒</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="header">
+        <div class="hello">Agendar Consulta</div>
+        <div></div>
+      </div>
+
+      <div class="table-container" style="margin-bottom:18px;">
+        <form id="consultaForm" style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+          <select id="pacienteSelect" required style="min-width:220px"></select>
+          <input id="data_hora" type="datetime-local" required />
+          <select id="usuarioSelect" style="min-width:200px;display:none;"></select>
+          <button type="submit">Agendar</button>
+          <div id="msg" style="margin-left:8px;color:#064e3b"></div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <div class="table-top">
+          <div class="title">Próximas consultas</div>
+          <div class="table-actions">
+            <input id="filterConsultas2" placeholder="Filtrar..." />
+          </div>
+        </div>
+
+        <table id="consultasTable">
+          <thead>
+            <tr><th>Paciente</th><th>Data/Hora</th><th>Médico</th><th>Status</th></tr>
+          </thead>
+          <tbody><tr><td colspan="4">Carregando...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/consultas.js"></script>
+</body>
+</html>

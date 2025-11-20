@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Novo Usuário - Mente & Corpo</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">M&C</div>
+      <nav>
+        <a class="icon" href="dashboard.html" title="Dashboard">🏠</a>
+        <a class="icon" href="consultas.html" title="Agendamento">📅</a>
+        <a class="icon" href="pacientes.html" title="Pacientes">👥</a>
+        <a class="icon" href="novo-paciente.html" title="Novo Paciente">➕</a>
+        <a class="icon" href="prontuario.html" title="Prontuário">📑</a>
+        <a class="icon" href="#" id="logoutIcon" title="Sair">🔒</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="header"><div class="hello">Novo Usuário</div></div>
+
+      <div class="table-container">
+        <form id="usuarioForm" style="display:flex;flex-direction:column;gap:8px;max-width:480px">
+          <input id="nome" placeholder="Nome" required />
+          <input id="email" type="email" placeholder="Email" required />
+          <input id="senha" type="password" placeholder="Senha" required />
+          <select id="cargo" required>
+            <option value="ADMIN">ADMIN</option>
+            <option value="SECRETARIA">SECRETARIA</option>
+            <option value="MEDICO">MEDICO</option>
+            <option value="PSICOLOGO">PSICOLOGO</option>
+            <option value="FISIOTERAPIA">FISIOTERAPIA</option>
+            <option value="NUTRICIONISTA">NUTRICIONISTA</option>
+            <option value="CLINICO">CLINICO</option>
+          </select>
+          <button type="submit">Criar Usuário</button>
+          <div id="msgUsuario" style="height:18px;color:#064e3b"></div>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/novo-usuario.js"></script>
+</body>
+</html>
